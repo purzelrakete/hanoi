@@ -9,18 +9,24 @@ require 'node'
 
 class Hanoi
   def initialize
-    @problem = Problem.new(disks = 4, pegs = 3)
-    @search = Search.new(@problem)
+    @problem = Problem.new(disks = cfg(0, 4) , pegs = cfg(1, 3))
+    @search  = Search.new(@problem)
   end
 
   def play
     if goal = @search.run
       Render.new(@problem, goal).animate
-      puts "problem solved after exploring #{ @search.explored_size } nodes"
+      puts "explored %d nodes" % @search.explored_size
     else
       abort "failed to reach goal state"
     end
   end
+
+  private
+
+    def cfg(index, default)
+      (ARGV[index] || default).to_i
+    end
 end
 
 hanoi = Hanoi.new
