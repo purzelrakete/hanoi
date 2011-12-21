@@ -34,9 +34,15 @@ class Render
   def render(state)
     @problem.disks.times do |n|
       setpos(n + @y, @x)
-      addstr state.row(n).to_a.map { |n| n > 0 ? n.to_s : "." }.join("")
+      state.row(n).to_a.each { |n| printit(n) }
       refresh
     end
   end
+
+  private
+
+    def printit(n)
+      addstr n > 0 ? n.to_s : "."
+    end
 end
 

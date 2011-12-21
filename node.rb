@@ -3,32 +3,45 @@
 #
 
 class Node
-  attr_accessor :state, :parent, :action, :path_cost
+  attr_accessor :state, :path_cost
 
-  def initialize(parent, state, step_cost, action = nil)
-    @parent = parent
+  def initialize(state, action = nil, path_cost = 0, parent = nil)
     @state = state
     @action = action
-    @path_cost = parent_path_cost + step_cost + heuristic
+    @path_cost = path_cost
+    @parent = parent
+  end
+
+  def expand(problem)
+    problem.actions(@state).map do |action|
+      Node.create(self, problem, action)
+    end
   end
 
   def path
     parent_path + [@state]
   end
 
-  def heuristic
-    state[0].size + state[1].size
-  end
-
   def <=>(other)
     path_cost <=> other.path_cost
   end
 
-  private
+  #
+  # Factory
+  #
 
-    def parent_path_cost
-      @parent ? @parent.path_cost : 0
-    end
+  def self.create(parent, problem, action)
+    result = problem.result(parent.state, action)
+
+    cost = \
+      parent.path_cost +
+      problem.step_cost(parent.state, action, result) +
+      problem.heuristic_cost(result)
+
+    Node.new(result, action, cost, parent)
+  end
+
+  private
 
     def parent_path
       @parent ? @parent.path : []
