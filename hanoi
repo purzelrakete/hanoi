@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+ $: << File.expand_path(File.dirname(__FILE__))
+
+require 'render'
+require 'search'
+require 'node'
+
+#
+# Main
+#
+
+hanoi = Search.new(ARGV[0].to_i, ARGV[1].to_i)
+
+if goal = hanoi.search
+  Render.new(hanoi, goal).animate
+  puts "problem solved after exploring #{ hanoi.explored } nodes"
+else
+  abort "failed to reach goal state"
+end
+
