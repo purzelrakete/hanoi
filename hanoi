@@ -9,7 +9,7 @@ require 'node'
 
 class Hanoi
   def initialize
-    @problem = Problem.new(disks = cfg(0, 4) , pegs = cfg(1, 3))
+    @problem = Problem.new(disks = cfg(0, 3) , pegs = cfg(1, 5))
     @search  = Search.new(@problem)
   end
 
