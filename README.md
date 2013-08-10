@@ -1,4 +1,4 @@
-# Towers of Hanoi
+# A* search
 
 [![Build Status](https://travis-ci.org/purzelrakete/hanoi.png)](https://travis-ci.org/purzelrakete/hanoi)
 
