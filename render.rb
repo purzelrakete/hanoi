@@ -11,38 +11,44 @@ class Render
   def initialize(problem, solution)
     @problem = problem
     @solution = solution
-
-    @x = 2
-    @y = 1
-
-    init_screen
   end
 
   def animate
-    @solution.path.each do |state|
-      render Matrix[*state.map { |peg| padded(peg) }].transpose
+    init_screen
+
+    slides.each do |slide|
+      render slide
       getch
     end
 
     ensure getch && close_screen
   end
 
+  def render(slide)
+    setpos(0, 0)
+    addstr(slide)
+    refresh
+  end
+
+  def slides
+    @solution.path.map do |state|
+      rows(Matrix[*state.map { |peg| padded(peg) }].transpose).join("\n")
+    end
+  end
+
+private
+
+  def rows(matrix)
+    (0...matrix.row_size).map do |row|
+       matrix.row(row).to_a.map { |cell| pixel(cell) }.join
+    end
+  end
+
   def padded(peg)
     ([0] * (@problem.disks - peg.size)) + peg
   end
 
-  def render(state)
-    @problem.disks.times do |n|
-      setpos(n + @y, @x)
-      state.row(n).to_a.each { |n| printit(n) }
-      refresh
-    end
+  def pixel(n)
+    n > 0 ? n.to_s : "."
   end
-
-  private
-
-    def printit(n)
-      addstr n > 0 ? n.to_s : "."
-    end
 end
-
