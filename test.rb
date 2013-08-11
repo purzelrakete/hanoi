@@ -1,13 +1,13 @@
 $: << File.expand_path(File.dirname(__FILE__))
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'render'
 require 'search'
 require 'problem'
 require 'node'
 require "test/unit"
-require 'coveralls'
-
-Coveralls.wear!
 
 class TestHanoi < Test::Unit::TestCase
   def test_result
