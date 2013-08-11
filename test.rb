@@ -5,6 +5,9 @@ require 'search'
 require 'problem'
 require 'node'
 require "test/unit"
+require 'coveralls'
+
+Coveralls.wear!
 
 class TestHanoi < Test::Unit::TestCase
   def test_result

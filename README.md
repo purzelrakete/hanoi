@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/purzelrakete/hanoi.png)](https://travis-ci.org/purzelrakete/hanoi)
 [![Code Climate](https://codeclimate.com/github/purzelrakete/hanoi.png)](https://codeclimate.com/github/purzelrakete/hanoi)
+[![Coverage Status](https://coveralls.io/repos/purzelrakete/hanoi/badge.png)](https://coveralls.io/r/purzelrakete/hanoi)
 
 A general way of doing `A*`, applied to towers of hanoi. As described by Peter
 Norvig.
