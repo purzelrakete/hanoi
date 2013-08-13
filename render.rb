@@ -24,12 +24,6 @@ class Render
     ensure getch && close_screen
   end
 
-  def render(slide)
-    setpos(0, 0)
-    addstr(slide)
-    refresh
-  end
-
   def slides
     @solution.path.map do |state|
       rows(Matrix[*state.map { |peg| padded(peg) }].transpose).join("\n")
@@ -37,6 +31,12 @@ class Render
   end
 
 private
+
+  def render(slide)
+    setpos(0, 0)
+    addstr(slide)
+    refresh
+  end
 
   def rows(matrix)
     (0...matrix.row_size).map do |row|
