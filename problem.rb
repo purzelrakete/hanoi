@@ -41,29 +41,27 @@ class Problem
   end
 
   private
+  def clone(state)
+    state.map { |s| Array.new(s) }
+  end
 
-    def clone(state)
-      state.map { |s| Array.new(s) }
-    end
+  def default_closing(disks, pegs)
+    peg(0) * (pegs - 1) + peg(disks)
+  end
 
-    def default_closing(disks, pegs)
-      peg(0) * (pegs - 1) + peg(disks)
-    end
+  def default_opening(disks, pegs)
+    peg(disks) + peg(0) * (pegs - 1)
+  end
 
-    def default_opening(disks, pegs)
-      peg(disks) + peg(0) * (pegs - 1)
-    end
+  def peg(n)
+    [n > 0 ? (1..n).to_a : []]
+  end
 
-    def peg(n)
-      [n > 0 ? (1..n).to_a : []]
-    end
+  def permutations
+    @p ||= (0...@pegs).to_a.permutation([:from, :to].size).to_a
+  end
 
-    def permutations
-      @p ||= (0...@pegs).to_a.permutation([:from, :to].size).to_a
-    end
-
-    def top(peg)
-      peg.first || @disks + 1
-    end
+  def top(peg)
+    peg.first || @disks + 1
+  end
 end
-

@@ -30,8 +30,7 @@ class Render
     end
   end
 
-private
-
+  private
   def render(slide)
     setpos(0, 0)
     addstr(slide)

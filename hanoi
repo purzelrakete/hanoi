@@ -23,10 +23,9 @@ class Hanoi
   end
 
   private
-
-    def cfg(index, default)
-      (ARGV[index] || default).to_i
-    end
+  def cfg(index, default)
+    (ARGV[index] || default).to_i
+  end
 end
 
 hanoi = Hanoi.new

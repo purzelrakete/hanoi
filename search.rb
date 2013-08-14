@@ -31,23 +31,21 @@ class Search
   end
 
   private
+  def add_to_explored(node)
+    @explored[node.state] = 1
+  end
 
-    def add_to_explored(node)
-      @explored[node.state] = 1
-    end
+  def add_to_frontier(node)
+    @frontier << node
+  end
 
-    def add_to_frontier(node)
-      @frontier << node
+  def pop
+    @frontier.first.tap do |node|
+      @frontier.delete(node)
     end
+  end
 
-    def pop
-      @frontier.first.tap do |node|
-        @frontier.delete(node)
-      end
-    end
-
-    def seen?(node)
-      @explored[node.state] || @frontier.map(&:state).include?(node.state)
-    end
+  def seen?(node)
+    @explored[node.state] || @frontier.map(&:state).include?(node.state)
+  end
 end
-

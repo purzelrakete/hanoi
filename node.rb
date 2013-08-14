@@ -42,9 +42,7 @@ class Node
   end
 
   private
-
-    def parent_path
-      @parent ? @parent.path : []
-    end
+  def parent_path
+    @parent ? @parent.path : []
+  end
 end
-
